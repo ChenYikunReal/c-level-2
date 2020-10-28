@@ -96,3 +96,155 @@ int main() {
     return 0;
 }
 ```
+
+4.十进制数转二进制数：
+```c
+#include <stdio.h>
+
+int main() {
+    int a[20], n, i;
+    printf("请输入一个十进制数：");
+    scanf("%d", &n);
+    for (i = 0; n > 0; i++){
+        a[i] = n % 2;
+        n /= 2;
+    }
+    printf("对应的二进制数是：");
+    for(i = i - 1; i >= 0; i--) {
+        printf("%d", a[i]);
+    }
+    return 0;
+}
+```
+
+5.正整数逐位编程one、two、three……：
+```c
+#include <stdio.h>
+
+int main() {
+    long int n, sum = 0, r;
+    printf("请输入一个正整数：");
+    scanf("%ld", &n);
+    while(n > 0) {
+        r = n % 10;
+        sum = sum * 10 + r;
+        n /= 10;
+    }
+    n = sum;
+    while(n > 0) {
+        r = n % 10;
+        switch(r) {
+            case 1:
+                printf("one ");
+                break;
+            case 2:
+                printf("two ");
+                break;
+            case 3:
+                printf("three ");
+                break;
+            case 4:
+                printf("four ");
+                break;
+            case 5:
+                printf("five ");
+                break;
+            case 6:
+                printf("six ");
+                break;
+            case 7:
+                printf("seven ");
+                break;
+            case 8:
+                printf("eight ");
+                break;
+            case 9:
+                printf("nine ");
+                break;
+            case 0:
+                printf("zero ");
+                break;
+            default:
+                printf("tttt");
+                break;
+        }
+        n /= 10;
+    }
+    return 0;
+}
+```
+
+6.打印阶乘三角形：
+```c
+#include <stdio.h>
+
+int main() {
+    int a = 0, b = 1, i, c, n, j;
+    printf("请输入一个正整数：");
+    scanf("%d", &n);
+    for (i = 1; i <= n; i++) {
+        a = 0;
+        b = 1;
+        printf("%4d ", b);
+        for (j = 1; j < i; j++) {
+            c = a + b;
+            printf("%4d ",c);
+            a = b;
+            b = c;
+        }
+        printf("\n");
+    }
+    return 0;
+}
+```
+
+7.输出数值递增三角：
+```c
+#include <stdio.h>
+
+int main() {
+    int i, j, k, l, n;
+    printf("请输入一个正整数：");
+    scanf("%d", &n);
+    for (i = 1; i <= n; i++) {
+        for (j = 1; j <= n-i; j++) {
+            printf(" ");
+        }
+        for (k = 1; k <= i; k++) {
+            printf("%d", k);
+        }
+        for (l = i-1; l >= 1; l--) {
+            printf("%d", l);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+```
+
+8.输出大写字母递增三角：
+```c
+#include <stdio.h>
+
+int main() {
+    int i, j, k, m, n;
+    int ch = 65;
+    printf("请输入一个正整数：");
+    scanf("%d", &n);
+    for (i = 1; i <= n; i++) {
+        for (j = n; j >= i; j--) {
+            printf(" ");
+        }
+        for (k = 1; k <= i; k++) {
+            printf("%c", ch++);
+        }
+        ch--;
+        for (m = 1; m < i; m++) {
+            printf("%c", --ch);
+        }
+        printf("\n");
+        ch=65;
+    }
+    return 0;
+}
+```
