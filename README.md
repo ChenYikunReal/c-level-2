@@ -248,3 +248,103 @@ int main() {
     return 0;
 }
 ```
+
+9.蒙特卡洛方法估计π：
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main() {
+    int intP, intCircle, intSquare, intToss, intRM, i;
+    float fltPi, fltX, fltY, fltR;
+    char ch;
+    intRM = RAND_MAX;
+    do {
+        intCircle = 0;
+        do {
+            printf("Enteer the number of tosses (2 <= N <= 500) : ");
+            scanf("%d", &intToss);
+        } while (intToss < 2 || intToss > 5000);
+        intSquare = intToss;
+        for (i = 0; i < intToss; i++) {
+            intP = rand();
+            fltX = (float) intP / intRM;
+            intP = rand();
+            fltY = (float) intP / intRM;
+            fltR = sqrt(fltX * fltX + fltY * fltY);
+            if (fltR <= 1) {
+                intCircle++;
+            }
+        }
+        fltPi = 4 * (float)intCircle / intSquare;
+        printf("the value of pi is : %f\n", fltPi);
+        printf("Do you want to continue ? (Y/N) : ");
+        scanf("%c", &ch);
+    } while (ch == 'y' || ch == 'Y');
+    printf("Thank you!\n");
+    return 0;
+}
+```
+
+10.八皇后问题求解：
+```c
+#include <stdio.h>
+#include <math.h>
+
+void queen(int row, int p);
+
+int chess[8], count;
+
+int main() {
+    int p = 8;
+    queen(1, p);
+    return 0;
+}
+
+void print(int p) {
+    int i, j;
+    char ch;
+    printf("\n\nThis is Solution No.%d\n\n", ++count);
+    for(i = 1; i <= p; i++) {
+        printf("\t%d", i);
+    }
+    for(i = 1; i <= p; i++) {
+        printf("\n\n%d", i);
+        for (j = 1; j <= p; j++) {
+            if (chess[i] == j) {
+                printf("\tQ");
+            } else {
+                printf("\t-");
+            }
+        }
+    }
+    printf("\n\n\nThere are total 92 solutions for 8-queens problem.");
+    printf("\nStrike Enter key to continue : ");
+    scanf("%c", &ch);
+}
+
+int place(int row, int column) {
+    int i;
+    for (i = 1; i <= row; i++) {
+        if (chess[i] == column || abs(chess-column) == abs(i-row)) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void queen(int row, int p) {
+    int column;
+    for (column = 1; column <= p; column++) {
+        if (place(row, column)) {
+            chess[row] = column;
+            if (row == p) {
+                print(p);
+            } else {
+                queen(row+1, p);
+            }
+        }
+    }
+}
+```
