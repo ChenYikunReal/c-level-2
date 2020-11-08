@@ -348,3 +348,63 @@ void queen(int row, int p) {
     }
 }
 ```
+
+11.下面程序的输出结果是：`x=14,y=4`
+```c
+#include <stdio.h>
+
+int main()
+{
+    int x=10,y=5;
+    switch(x)
+    {
+        case 1:x++;
+        default: x+=y;
+        case 2:y--;
+        case 3:x--;
+    }
+    printf("x=%d,y=%d",x,y);
+    return 0;
+}
+```
+说明：如果不break，则匹配一次成功后的都会执行。
+
+12.下面程序的输出结果是：`####`
+```c
+#include <stdio.h>
+
+int main()
+{
+    int x=3,y=0,z=0;
+    if(x=y+z)
+        printf("****");
+    else
+        printf("####");
+    return 0;
+}
+```
+说明：之前误以为赋值成功则必为真，现在才发现应该是赋值不为0则必为真。
+
+13.下面程序的输出结果是：`2`
+```c
+#include <stdio.h>
+
+int main()
+{
+    int a=2,b=1,c=0;
+    if(a>=b){
+        switch(a++,b++)
+        {
+            case 1:
+                c=a;
+            case 0:
+                c=b;break;
+            default:
+                c=0;
+        }
+    }
+    printf("%d",c);
+    return 0;
+}
+```
+说明：一则是在switch条件判断的时候出现了++则a和b的值会改变，另一方面应用到case时a++和b++输出的只有原先的a和b。由于出现了逗号运算符，所以实际switch的是b的原值。进入case先匹配了1但是没有break，会再次匹配2，但是原先对c的赋值便不作数了，此后break。
