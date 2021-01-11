@@ -408,3 +408,184 @@ int main()
 }
 ```
 说明：一则是在switch条件判断的时候出现了++则a和b的值会改变，另一方面应用到case时a++和b++输出的只有原先的a和b。由于出现了逗号运算符，所以实际switch的是b的原值。进入case先匹配了1但是没有break，会再次匹配2，但是原先对c的赋值便不作数了，此后break。
+
+14.统计输入字符串中大小写字母的个数：
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char str[128];
+    gets(str);
+    int length = strlen(str), counter = 0;
+    for (int i = 0; i < length; i++) {
+        if (isalpha(str[i])) {
+            counter++;
+        }
+    }
+    printf("%d", counter);
+    return 0;
+}
+```
+
+15.从键盘依次输入的M个整数倒序输出：
+```c
+#include <stdio.h>
+
+int main() {
+    int n;
+    printf("请输入整数个数：\n");
+    scanf("%d", &n);
+    int nums[n];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &nums[i]);
+    }
+    for (int i = n-1; i >= 0; i--) {
+        printf("%d ", nums[i]);
+    }
+    return 0;
+}
+```
+
+16.键盘输入两个整数，以及一个运算符进行运算（输入格式为`1+2`，输出格式为`1+2=3`）：
+```c
+#include <stdio.h>
+
+int main() {
+    int a, b;
+    char operator;
+    scanf("%d%c%d", &a, &operator, &b);
+    switch (operator) {
+        case '+':
+            printf("%d%c%d=%d", a, operator, b, a+b);
+            break;
+        case '-':
+            printf("%d%c%d=%d", a, operator, b, a-b);
+            break;
+        case '*':
+            printf("%d%c%d=%d", a, operator, b, a*b);
+            break;
+        case '/':
+            if (b == 0) {
+                printf("Divide Error!");
+            } else {
+                printf("%d%c%d=%d", a, operator, b, a/b);
+            }
+            break;
+        case '%':
+            if (b == 0) {
+                printf("Mod Error!");
+            } else {
+                printf("%d%c%d=%d", a, operator, b, a%b);
+            }
+            break;
+    }
+    return 0;
+}
+```
+
+17.统计201~300之间的所有素数并统计总个数：
+```c
+#include <stdio.h>
+
+int main() {
+    int counter = 0;
+    for (int i = 201; i <= 300; i++) {
+        int flag = 1;
+        for (int j = 2; j < i; j++) {
+            if (i % j == 0) {
+                flag = 0;
+                break;
+            }
+        }
+        if (flag) {
+            printf("%d ", i);
+            counter++;
+        }
+    }
+    printf("\n%d", counter);
+    return 0;
+}
+```
+
+18.统计输入字符串中大写字母的个数：
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char str[128];
+    gets(str);
+    int length = strlen(str), counter = 0;
+    for (int i = 0; i < length; i++) {
+        if (isupper(str[i])) {
+            counter++;
+        }
+    }
+    printf("%d", counter);
+    return 0;
+}
+```
+
+19.从键盘依次输入的M个整数并输出其中的偶数：
+```c
+#include <stdio.h>
+
+int main() {
+    int n, temp;
+    printf("请输入整数个数：\n");
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &temp);
+        if (temp % 2 == 0) {
+            printf("%d ", temp);
+        }
+    }
+    return 0;
+}
+```
+
+20.输出如下三角形：
+```text
+        *
+      * * *
+    * * * * *
+  * * * * * * *
+* * * * * * * * *
+```
+代码如下：
+```c
+#include <stdio.h>
+
+int main() {
+    for (int i = 1; i <= 5; i++) {
+        for (int j = 5-i; j > 0; j--) {
+            printf("  ");
+        }
+        for (int j = 0; j < 2*i-1; j++) {
+            printf("* ");
+        }
+        printf("\n");
+    }
+    return 0;
+}
+```
+
+21.假设公鸡2元、母鸡1元、小鸡0.5元，求百钱买百鸡的解决方案：
+```c
+#include <stdio.h>
+
+int main() {
+    for (int i = 0; i <= 50; i++) {
+        // 至多100只鸡
+        for (int j = 0; j <= 100-i; j++) {
+            if (i*4 + j*2 + (100-i-j)*1 == 200) {
+                printf("%d %d %d\n", i, j, (100-i-j));
+            }
+        }
+    }
+    return 0;
+}
+```
